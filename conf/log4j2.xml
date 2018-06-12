@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="debug" strict="true" name="XMLConfig">
+    <Properties>
+        <Property name="logPath">${sys:user.home}/var/log/akka-api</Property>
+        <Property name="layout.pattern">[%d][%t][%p][%c] - %m%n</Property>
+    </Properties>
+    <Filter type="ThresholdFilter" level="debug"/>
+
+    <Appenders>
+        <Console name="STDOUT" target="SYSTEM_OUT">
+            <PatternLayout>
+                <Pattern>${layout.pattern}</Pattern>
+            </PatternLayout>
+        </Console>
+
+        <RollingFile name="akka_api" fileName="${logPath}/akka_api/app.log"
+                     filePattern="${logPath}/akka_api/app-%d{yyyy-MM-dd HH:mm:ss}-%i.log">
+            <PatternLayout>
+                <Pattern>${layout.pattern}</Pattern>
+            </PatternLayout>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="100MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="5" />
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <Logger name="com.cathay" level="debug" additivity="true">
+            <AppenderRef ref="akka-api"/>
+        </Logger>
+
+        <Root level="debug">
+            <AppenderRef ref="STDOUT"/>
+        </Root>
+    </Loggers>
+
+</Configuration>
