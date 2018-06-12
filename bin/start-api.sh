@@ -1,7 +1,7 @@
 #!/bin/sh
 APP_HOME="$(cd "`dirname "$0"`"/..; pwd)"
 
-START_PATH=${APP_HOME}/akka_api.jar
+START_PATH=${APP_HOME}/akka-api-cicd.jar
 
 cd ${APP_HOME}
 
